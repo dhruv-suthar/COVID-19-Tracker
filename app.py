@@ -2,7 +2,7 @@ from datetime import datetime
 import requests
 import os
 from flask import Flask , render_template ,flash , redirect , url_for ,  request , abort ,jsonify , make_response , Response , session , Markup
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from state_wise_data_scrapper import *
 import pyrebase
 from functools import wraps
