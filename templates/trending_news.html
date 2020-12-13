@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta icon="utf-8">
+  
+  <meta name="title" content="Corona virus covid`19 Tracker India|China|United State|Italy">
+  <meta name="description" content="Live|Latest Covid-19 | COVID-19 continuing to impact people around the World, visit Coronaviruseseffect.com to know about Confirmed Cases & Deaths. Corona Virus effect World Countries|India by state|Details of people died|Latest news update|Prediction">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="1 days">
+  <meta name="author" content="Corona virus covid-19 tracker">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}?q=1280549780">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" >
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+
+
+
+  
+	<title>COVID-19 Tracker</title>
+</head>
+<body>
+ <br>
+   
+     <!-- <div class="row">
+       <div class="col-1">
+         
+       </div>
+       <div class="col-10 text-center">
+         <h4 >COVID-19 CORONAVIRUS </h4>
+        <h6>(Trending News)</h6>
+       </div>
+       <div class="col-1">
+         <a href="/trending-news/admin-login"><i class="fa fa-times" style="font-size: 30px;"></i></a>
+       </div>
+     </div> -->
+     <section>
+  <div class="container-fluid">
+  
+      
+      <center><h4>COVID-19 Tracker</h4></center>
+
+  
+  </div>
+  </section>
+   
+
+
+  <hr>
+  <center>
+  
+
+  <!-- Links -->
+  <ul class="list-inline nav-list pt-0 mt-0">
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/country/India">India</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/top-10">Top 10</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/bottom-10">Bottom 10</a>
+    </li>
+      <li class="list-inline-item nav-item">
+     <a class="nav-link" href="/articles" style="font-weight: bold!important;">Articles</a>
+    </li>
+    
+  </ul>
+ <hr>
+
+</center>
+
+
+<div class="corona-trending-news-panel  m-3 mt-1 mb-0">
+   
+   <div class="container  pb-1 mb-0 mt-0">
+     {% include '_messages.html' %}
+   </div>
+   <div class="container mt-0  " >
+    {% for trending_news in trending_news|reverse %}
+     <div class="row mb-3 pb-0  flex-column-reverse flex-lg-row neomorphism-layout  h-lg-50 " style="min-height: 50%;">
+
+      <div class="col-lg-1  pb-1 mb-0 mt-0 p-0 h-0 w-0"></div>
+       <div class="col-lg-8  pb-1 mb-0 mt-0 {% if trending_news.image == ''%} col-lg-11 {% endif %}">
+        &nbsp;
+         <h5><a href="/articles/{{ trending_news.title }}" >{{ trending_news.title }}</a></h5>
+
+         <p class="small"><i>{{ trending_news.created_at }}</i></p>
+        
+         <p  style="width:100%;height: 50px; overflow-y: hidden;scroll-behavior: smooth;" class="trending_news_b_des">{{ trending_news.description }}</p>
+         
+       </div>
+         {% if trending_news.image != '' %}
+       <div class="col-lg-3 p-3 pb-0 mb-0 mb-0">
+         <img src="static/SERVER_FILES/img/{{ trending_news.image }}" class="img-thumbnail img-fluid trending_news_img" style="width: 100%;max-height: 125px;min-height: 125px;">
+       </div>
+       {% endif %}
+     </div>
+     <hr>
+     {% endfor %}
+
+
+     <!-- <div class="row">
+
+      {% for trending_news in trending_news %}
+       <div class="col mb-1 mt-1">
+         <div class="card" style="max-width: 18rem;">
+      
+      {% if trending_news.image != '' %}
+      <img class="card-img-top" src="/static/SERVER_FILES/img/{{trending_news.image}}" alt="Card image cap">
+       {% endif %}
+      <div class="card-body">
+        <a href=""><h5 class="card-title">{{trending_news.title}}</h5></a>
+        <p class="card-text">{{ trending_news.created_at }}</p>
+      </div>
+      </div>
+      </div>
+      {% endfor %}
+
+    </div> -->
+     </div>
+ 
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" ></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+   <script src="{{ url_for('static',filename='js/analytics.js') }}" type="text/javascript"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161600563-1"></script>
+<script>
+  $(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+</html>  

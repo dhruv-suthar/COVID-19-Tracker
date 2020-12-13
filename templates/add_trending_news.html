@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta icon="utf-8">
+  
+  <meta name="title" content="Corona virus covid`19 Tracker India|China|United State|Italy">
+  <meta name="description" content="Live|Latest Covid-19 | COVID-19 continuing to impact people around the World, visit Coronaviruseseffect.com to know about Confirmed Cases & Deaths. Corona Virus effect World Countries|India by state|Details of people died|Latest news update|Prediction">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="1 days">
+  <meta name="author" content="Corona virus covid-19 tracker">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}?q=1280549780">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha256-tQ3x4V2JW+L0ew/P3v2xzL46XDjEWUExFkCDY0Rflqc=" crossorigin="anonymous"></script>
+ 
+	<title>COVID-19 Tracker</title>
+</head>
+<body>
+	
+  <br>
+  <section>
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col"></div>
+      <div class="col"> <center><h4>COVID-19 CORONAVIRUS</h4></center></div>
+      <div class="col text-right">
+       {% if session.admin_logged_in %}
+        <a href="/articles/admin-logout" style="color: #2a7886!important;" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out" style="font-size: 30px;"></i></a>
+       {% else %}
+        <a href="/articles/admin-login" style="color: #2a7886!important;" data-toggle="tooltip" data-placement="bottom" title="Login"><i class="fa fa-sign-in" style="font-size: 30px;"></i></a>
+       {% endif %}
+        
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <hr>
+
+
+  <div class="container mt-3 mb-3 ">
+
+  <div class="row ">
+    
+    <div class="col-lg-3">
+      
+    </div>
+    <div class="col-lg-6  ">
+       {% include '_messages.html' %}
+       
+        <div class="neomorphism-layout p-3">
+          <center><h4>Add News</h4></center>
+          <hr>
+
+           <form method="post"  action="/add-article"
+                                  enctype=multipart/form-data>
+
+                  <div class="form-group ">
+           <label for="Topic_Name" class="col-form-label ">Image</label>
+           &nbsp;
+         
+             <input class="file-upload-input" type='file' onchange="" accept="image/*"  name="image"  />
+             
+            
+         </ul>
+          
+
+           </div>
+
+
+              <div class="form-group">
+            <label for="Topic_Name" class="col-form-label ">Title</label>
+            <input type="text" class="form-control all-border" id="Topic_Name" placeholder="" name="title" required="">
+          </div>
+
+           
+
+            <div class="form-group">
+                <label for="Description" class="col-form-label">Description</label>
+                      <textarea class="form-control" id="Description" rows="3" name="description" required=""></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Description" class="col-form-label">Source</label>
+                     <input type="text" class="form-control all-border" id="Topic_Name" placeholder="" name="source" required="" >
+            </div>
+
+ 
+  <div class="form-group">
+    <label for="tags">tags</label>
+    <div class="bs-example">
+            <input type="text" value="Corona,Corona-virus" data-role="tagsinput" name="tags" style="width :500px!important;" />
+          </div>
+    </div>
+
+
+          <button type="submit" class="btn btn-primary btn-block" style="background-color: #2a7886;">Add</button>
+
+          </form>
+        </div>
+       
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
+
+
+</body>
+
+
+     
+    
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" ></script>
+
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+   
+<script>
+	$(document).ready(function(){
+
+
+    $('#coronatab').DataTable({
+
+
+      "scrollX": true,
+    // "scrollY": "50vh",
+    "scrollCollapse": true,
+    "select" : false,
+    "info": true,         // Will show "1 to n of n entries" Text at bottom
+    "lengthChange": false,
+     "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    "pageLength": 100
+
+  });
+    $('.dataTables_length').addClass('bs-select');
+
+
+
+     $('[data-toggle="tooltip"]').tooltip();
+    // $('.bootstrap-tagsinput > span > span').addClass('fa fa-times');
+	 }); 
+
+
+	
+</script>
+
+<script type="text/javascript">
+  const tagContainer = document.querySelector('.tag-container');
+const input = document.querySelector('.tag-container input');
+
+let tags = [];
+
+function createTag(label) {
+  const div = document.createElement('div');
+  div.setAttribute('class', 'tag');
+  const span = document.createElement('span');
+  span.innerHTML = label;
+  const closeIcon = document.createElement('i');
+  closeIcon.innerHTML = 'close';
+  closeIcon.setAttribute('class', 'material-icons');
+  closeIcon.setAttribute('data-item', label);
+  div.appendChild(span);
+  div.appendChild(closeIcon);
+  return div;
+}
+
+function clearTags() {
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.parentElement.removeChild(tag);
+  });
+}
+
+function addTags() {
+  clearTags();
+  tags.slice().reverse().forEach(tag => {
+    tagContainer.prepend(createTag(tag));
+  });
+}
+
+input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      e.target.value.split(',').forEach(tag => {
+        tags.push(tag);  
+      });
+      
+      addTags();
+      input.value = '';
+    }
+});
+document.addEventListener('click', (e) => {
+  console.log(e.target.tagName);
+  if (e.target.tagName === 'I') {
+    const tagLabel = e.target.getAttribute('data-item');
+    const index = tags.indexOf(tagLabel);
+    tags = [...tags.slice(0, index), ...tags.slice(index+1)];
+    addTags();    
+  }
+})
+
+input.focus();
+
+</script>
+</html>

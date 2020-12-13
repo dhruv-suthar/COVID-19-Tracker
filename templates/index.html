@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta icon="utf-8">
+  
+  <meta name="title" content="Corona virus covid`19 Tracker India|China|United State|Italy">
+  <meta name="description" content="Live|Latest Covid-19 | COVID-19 continuing to impact people around the World, visit Coronaviruseseffect.com to know about Confirmed Cases & Deaths. Corona Virus effect World Countries|India by state|Details of people died|Latest news update|Prediction">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="1 days">
+  <meta name="author" content="Corona virus covid-19 tracker">
+  
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}?q=1280549780">
+  
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+    
+
+
+
+	<title>COVID-19 Tracker</title>
+</head>
+<body>
+	
+  <br>
+  <center><h4>COVID-19 Tracker</h4></center>
+  <hr>
+  <center>
+  
+
+  <!-- Links -->
+  <ul class="list-inline nav-list pt-0 mt-0">
+    <li class="list-inline-item nav-item ">
+      <a class="nav-link active" href="/" style="font-weight: bold!important;">Home</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/country/India">India</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/top-10">Top 10</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/bottom-10">Bottom 10</a>
+    </li>
+     <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/articles">Articles</a>
+    </li>
+    
+  </ul>
+ <hr>
+
+</center>
+
+
+<!-- <div class="corona-trending-news-panel  m-3 mb-0">
+   <center>
+   <h4>
+    <a href="/trending-news">
+     Trending news
+     </a>
+   </h4>
+   </center>
+  <div class="justify-content-center">
+  </div>
+</div> -->
+
+  <div class="corona-panel m-5 mb-0" style="margin-bottom: 1px!important;">
+    <div class="row justify-content-center">
+   
+        <div class="col-lg-3 text-center mb-3">
+          <h4>Confirmed</h4>
+          <h5>{{ total_confirm_cases}}</h5>
+        </div>
+         <div class="col-lg-3 text-center mb-3">
+          <h4>Active</h4>
+          <h5>{{ total_active_cases}}</h5>
+        </div>
+         <div class="col-lg-3 text-center mb-3">
+          <h4 style="color: #e06969;">Deaths</h4>
+          <h5 style="color: #f67575;">{{ total_deaths }}</h5>
+        </div>
+         <div class="col-lg-3 text-center mb-3">
+          <h4>Recovered</h4>
+          <h5>{{ total_recovered }}</h5>
+        </div>
+      </div>
+    </div>
+
+
+
+    
+     <div class="d-flex justify-content-center">
+          <select class="browser-default  custom-select mt-0 mb-0" style="width: 35%;">
+         <option selected>Select Country</option>
+ {% for country_names in country_names %}
+  <option  value="{{ country_names }}">{{ country_names }}</option>
+ {% endfor %}
+</select>
+     </div>
+      
+    
+   
+
+
+<div class="corona-charts">
+  <div class="row  m-3   ">
+    <div class="col-lg-4  mt-sm-3 ">
+      <h6>Total Confirmed </h6>
+ 
+      <canvas id="myChart" class=""></canvas>
+      <br>
+    </div>
+
+    <div class="col-lg-4 mt-sm-3 ">
+      <h6>Total Deaths</h6>
+    
+      <canvas id="myChart1" class=""></canvas>
+       <br>
+    </div>
+
+    <div class="col-lg-4 mt-sm-3 ">
+      <h6>Total Recovered</h6>
+    
+      <canvas id="myChart2" class=""></canvas>
+    </div>
+  </div>
+</div>
+<br>
+    <div class="corona-detail-panel m-3 mt-5 mt-sm-1 ml-xs-0 mr-xs-0">
+       <center><h4 class="ml-3 ml-3">Confirmed Cases and Deaths by Country, Territory, or Conveyance</h4></center>
+       <div class="corona-table mt-3  table-responsive pl-3 pr-3 ">
+       
+
+<table class="table table-striped " id="coronatab" width="100%">
+  <thead class="grey " style="position: relative;">
+    <tr>
+      <th scope="col" >Country</th>
+      <th scope="col" >Confirmed</th>
+      <th scope="col" >Active</th>
+      <th scope="col" >Deaths</th>
+      <th scope="col" >Recovered</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    {% for country_wise_data in country_wise_data %}
+    <tr>
+     
+      <th scope="row"><a href="/country/{{country_wise_data.country}}">{{ country_wise_data.country }}</a></th>
+      <td>{{ country_wise_data.confirmed }}</td>
+      <td>{{ country_wise_data.active }}</td>
+     
+      <td>{{ country_wise_data.deaths }}</td>
+     
+      <td>{{  country_wise_data.recovered  }}</td>
+    
+      
+    </tr>
+    {% endfor %}
+    
+    <tfoot>
+    <tr>
+      <th>Total
+      </th>
+      <th>{{total_confirm_cases}}
+      </th>
+       <th>{{total_active_cases}}
+      </th>
+     <th>{{ total_deaths }}
+      </th>
+      <th>{{ total_recovered }}
+      </th>
+     
+      </th>
+    </tr>
+  </tfoot>
+  </tbody>
+</table>
+       </div>
+    </div>
+
+
+
+ 
+</body>
+
+
+    
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" ></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+   
+
+<script>
+	$(document).ready(function(){
+
+
+    $('#coronatab').DataTable({
+
+
+    "scrollX": true,
+    // "scrollY": "200vh",
+    "scrollCollapse": true,
+    "select" : false,
+     "info": true,         // Will show "1 to n of n entries" Text at bottom
+    "lengthChange": false, // Will Disabled Record number per page
+   
+    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    "pageLength": 200,
+
+    "order": [[ 1, "desc" ]]
+
+  });
+    $('.dataTables_length').addClass('bs-select');
+
+
+      $(".custom-select").change(function () {
+
+                    // var selectedVal = $("#myselect option:selected").text();
+                    var country_name = $(".custom-select option:selected").val();
+                     window.location.href = "/country/" + (country_name);
+                  
+
+                });
+	 }); 
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels:  [
+        {% for item in labels %}
+           "{{ item }}",
+          {% endfor %}],
+        datasets: [{
+            label: 'Confirmed',
+             borderWidth : '3',
+
+               pointBorderWidth : '3px',
+               pointRadius : '0',
+            borderColor: '#2a7886',
+            data: [
+              {% for item in total_confirmed_f_graph %}
+           "{{ item }}",
+          {% endfor %}
+            ]
+        }]
+    },
+    options: {
+
+      tooltips: {
+            mode: 'y',
+            backgroundColor :'#2a7886'
+        },
+        labels: 'current_data',
+            name: 'current_data',
+         legend: {
+            display: true,
+
+        },
+      
+    }
+});
+
+  var ctx1 = document.getElementById('myChart1').getContext('2d');
+
+  var myLineChart1 = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: [
+        {% for item in labels %}
+           "{{ item }}",
+          {% endfor %}],
+
+
+        
+        datasets: [{
+            label: 'Deaths',
+             borderWidth : '3',
+             pointBorderWidth : '3px',
+             pointRadius : '0',
+            borderColor: '#f67575',
+            data: [
+            {% for item in total_deaths_f_graph %}
+           "{{ item }}",
+          {% endfor %}
+            ]
+        }]
+    },
+    options: {
+
+       legend: {
+            display: true,
+
+           
+
+        },
+     
+    }
+});
+
+
+  var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+  var myLineChart = new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels:  [
+        {% for item in labels %}
+           "{{ item }}",
+          {% endfor %}],
+        datasets: [{
+            label: 'Recovered',
+             borderWidth : '3',
+
+               pointBorderWidth : '3px',
+               pointRadius : '0',
+            borderColor: '#2a7886',
+            data: [
+              {% for item in total_recovered_f_graph %}
+           "{{ item }}",
+          {% endfor %}
+            ]
+        }]
+    },
+    options: {
+
+      tooltips: {
+            mode: 'y',
+            backgroundColor :'#2a7886'
+        },
+        labels: 'current_data',
+            name: 'current_data',
+         legend: {
+            display: true,
+
+        },
+      
+    }
+});
+
+	
+</script>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta icon="utf-8">
+  
+  <meta name="title" content="Corona virus covid`19 effect trends India|China|United State|Italy">
+  <meta name="description" content="Live|Latest Covid-19 | COVID-19 continuing to impact people around the World, visit Coronaviruseseffect.com to know about Confirmed Cases & Deaths. Corona Virus effect World Countries|India by state|Details of people died|Latest news update|Prediction">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="1 days">
+  <meta name="author" content="Corona virus covid-19 trend tracker">
+  
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}?q=1280549780">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" >
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dataTables/dataTables.bootstrap.css') }}?q=1280549780">
+
+  
+
+
+	<title>COVID-19 Tracker</title>
+</head>
+<body>
+   <br>
+   
+   
+     <section>
+  <div class="container-fluid">
+    
+      <center><h4>COVID-19 Tracker</h4></center>
+ 
+    
+  </div>
+  </section>
+   
+
+     
+
+  <hr>
+
+
+  <center>
+  
+
+  <!-- Links -->
+  <ul class="list-inline nav-list pt-0 mt-0">
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/country/India">India</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/top-10">Top 10</a>
+    </li>
+    <li class="list-inline-item nav-item">
+      <a class="nav-link" href="/bottom-10">Bottom 10</a>
+    </li>
+      <li class="list-inline-item nav-item">
+     <a class="nav-link" href="/articles" style="font-weight: bold!important;">Articles</a>
+    </li>
+   
+  </ul>
+ <hr>
+
+</center>
+
+
+<div class="corona-trending-news-panel  m-3 mb-0">
+ 
+  
+
+   <div class="container mt-3">
+      <div class="row">
+        <div class="col-lg-2">
+         
+        </div>
+        <div class="col-lg-8 p-3 neomorphism-layout">
+          {% if trending_news.image != '' %}
+          
+           <img src="/static/SERVER_FILES/img/{{ trending_news.image }}" class="img-fluid img-thumbnail all-border w-100" >
+           <hr>
+          {% endif %}
+          <h4>{{ trending_news.title }}</h4>
+          {% if trending_news.image == '' %}
+          <hr>
+          {% endif %}
+          <i><p class="small">{{ trending_news.created_at }}</p></i>
+          <p>{{ trending_news.description }}</p>
+          <b>Source :</b><p>{{ trending_news.source  }}</p>
+          <b>Tags :</b> <p>{{ trending_news.tags }}</p>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+     </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" ></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+   <script>
+  $(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>  
+</html>  
