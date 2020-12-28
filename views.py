@@ -38,10 +38,10 @@ def index():
     total_recovered = 0
 
 
-    total_confirm_cases = total_corona_main_data['cases']
-    total_acive_cases = total_corona_main_data['active']
-    total_deaths = total_corona_main_data['deaths']
-    total_recovered = total_corona_main_data['recovered']
+    total_confirm_cases = format(total_corona_main_data['cases'],',d')
+    total_acive_cases = format(total_corona_main_data['active'],',d')
+    total_deaths = format(total_corona_main_data['deaths'],',d')
+    total_recovered = format(total_corona_main_data['recovered'],',d')
 
 
     country_wise_data = []
@@ -52,10 +52,10 @@ def index():
     for corona_data in get_country_wise_data:
         info = {
           "country" : corona_data["country"],
-          "confirmed" : corona_data["cases"],
-          "active"   : corona_data["active"],
-          "deaths"   : corona_data["deaths"],
-          "recovered" : corona_data["recovered"]
+          "confirmed" : format(corona_data["cases"],',d'),
+          "active"   : format(corona_data["active"],',d'),
+          "deaths"   : format(corona_data["deaths"],',d'),
+          "recovered" : format(corona_data["recovered"],',d')
         }
         country_names.append(corona_data["country"])
         country_wise_data.append(info)
@@ -93,10 +93,10 @@ def top_10_cases():
     for corona_data in get_country_wise_data:
         info = {
           "country" : corona_data["country"],
-          "confirmed" : corona_data["cases"],
-          "active"   : corona_data["active"],
-          "deaths"   : corona_data["deaths"],
-          "recovered" : corona_data["recovered"]
+          "confirmed" : format(corona_data["cases"],',d'),
+          "active"   :  format(corona_data["active"],',d'),
+          "deaths"   : format(corona_data["deaths"],',d'),
+          "recovered" : format(corona_data["recovered"],',d')
         }
         
         top_10_datas.append(info)
@@ -118,10 +118,10 @@ def bottom_10_cases():
     for corona_data in get_country_wise_data:
         info = {
           "country" : corona_data["country"],
-          "confirmed" : corona_data["cases"],
-          "active"   : corona_data["active"],
-          "deaths"   : corona_data["deaths"],
-          "recovered" : corona_data["recovered"]
+          "confirmed" : format(corona_data["cases"],',d'),
+          "active"   :  format(corona_data["active"],',d'),
+          "deaths"   : format(corona_data["deaths"],',d'),
+          "recovered" : format(corona_data["recovered"],',d')
         }
         
         bottom_10_datas.append(info)
@@ -140,10 +140,10 @@ def country_wise_data(country_name):
 
     get_country_data = requests.get(app.config["COUNTRY_DATA_URL"].format(country_name)).json()
 
-    total_confirmed = get_country_data["cases"]
-    total_active = get_country_data["active"]
-    total_deaths = get_country_data["deaths"]
-    total_recovered = get_country_data["recovered"]
+    total_confirmed = format(get_country_data["cases"],',d')
+    total_active = format(get_country_data["active"],',d')
+    total_deaths = format(get_country_data["deaths"],',d')
+    total_recovered = format(get_country_data["recovered"],',d')
 
     labels = []
     total_confirmed_f_graph = []
@@ -177,17 +177,17 @@ def country_wise_data(country_name):
                 info = {
 
                     "state" : data['state_wise_data'][i]['state'] ,
-                    "confirmed" :data['state_wise_data'][i]['confirmed'],
-                    "deaths" : data['state_wise_data'][i]['deaths'],
-                    "recovered": data['state_wise_data'][i]['recovered'],
+                    "confirmed" :  format(int(data['state_wise_data'][i]['confirmed']),',d'),
+                    "deaths" : format(int(data['state_wise_data'][i]['deaths']),',d'),
+                    "recovered": format(int(data['state_wise_data'][i]['recovered']),',d'),
                 }
                 state_wise_datas.append(info)
              
 
             total_state_data =[]
-            total_state_data.append(data['state_wise_data'][0]['Total number of confirmed cases in India'])
-            total_state_data.append(data['state_wise_data'][0]['Total number of deaths  in India']) 
-            total_state_data.append(data['state_wise_data'][0]['Total number of recovered  in India'])
+            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of confirmed cases in India']),',d'))
+            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of deaths  in India']) ,',d') )
+            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of recovered  in India']),',d'))
 
         
         return render_template('county_wise_corona_data.html',country_name=country_name,total_confirmed=total_confirmed,total_active=total_active,total_deaths=total_deaths,total_recovered=total_recovered,labels=labels,total_confirmed_f_graph=total_confirmed_f_graph,total_deaths_f_graph=total_deaths_f_graph,total_recovered_f_graph=total_recovered_f_graph,state_wise_datas=state_wise_datas,total_state_data=total_state_data)
