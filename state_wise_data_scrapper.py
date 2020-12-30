@@ -20,9 +20,9 @@ def scrape_state_wise_date(urls):
     print(corona_statewise_totaldata)
 
     info = {
-                "Total number of confirmed cases in India" : str(corona_statewise_totaldata[-1].select('th')[1].text),
+                "Total number of confirmed cases in India" : str(corona_statewise_totaldata[-1].select('th')[2].text),
                 "Total number of deaths  in India"    : str(corona_statewise_totaldata[-1].select('th')[3].text),
-                "Total number of recovered  in India" : str(corona_statewise_totaldata[-1].select('th')[2].text)
+                "Total number of recovered  in India" : str(corona_statewise_totaldata[-1].select('th')[4].text)
             }
 
     state_wise_data.append(info)        
@@ -31,8 +31,8 @@ def scrape_state_wise_date(urls):
     for corona_statewise_data in corona_statewise_data:
         info = {
             "state": str(corona_statewise_data.find_all('td')[0].text),
-            "confirmed" : str(corona_statewise_data.find_all('td')[1].text),
-            "recovered"    : str(corona_statewise_data.find_all('td')[2].text),
+            "confirmed" : str(corona_statewise_data.find_all('td')[2].text),
+            "recovered"    : str(corona_statewise_data.find_all('td')[4].text),
             "deaths" : str(corona_statewise_data.find_all('td')[3].text)
             }
         state_wise_data.append(info)
