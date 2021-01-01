@@ -92,18 +92,25 @@ def top_10_cases():
 
     for corona_data in get_country_wise_data:
         info = {
-          "country" : corona_data["country"],
-          "confirmed" : format(corona_data["cases"],',d'),
-          "active"   :  format(corona_data["active"],',d'),
-          "deaths"   : format(corona_data["deaths"],',d'),
-          "recovered" : format(corona_data["recovered"],',d')
+          "country" :   corona_data["country"],
+          "confirmed" : corona_data["cases"],
+          "active"   :  corona_data["active"],
+          "deaths"   :  corona_data["deaths"],
+          "recovered" : corona_data["recovered"]
         }
         
         top_10_datas.append(info)
     
-    top_10_datas = sorted(top_10_datas,key= lambda i:i['confirmed'],reverse=True)    
+    top_10_datas = sorted(top_10_datas,key= lambda i:int(i["confirmed"]),reverse=True) 
 
     top_10_datas = top_10_datas[:10]
+
+    for i in range(0,len(top_10_datas)):
+        top_10_datas[i]["country"] = top_10_datas[i]["country"]
+        top_10_datas[i]["confirmed"] = format(top_10_datas[i]["confirmed"],',d')
+        top_10_datas[i]["active"] = format(top_10_datas[i]["active"],',d')
+        top_10_datas[i]["deaths"] = format(top_10_datas[i]["deaths"],',d')
+        top_10_datas[i]["recovered"] = format(top_10_datas[i]["recovered"],',d')
 
     return render_template('top_10_datas.html',top_10_datas=top_10_datas)
 
@@ -118,18 +125,26 @@ def bottom_10_cases():
     for corona_data in get_country_wise_data:
         info = {
           "country" : corona_data["country"],
-          "confirmed" : format(corona_data["cases"],',d'),
-          "active"   :  format(corona_data["active"],',d'),
-          "deaths"   : format(corona_data["deaths"],',d'),
-          "recovered" : format(corona_data["recovered"],',d')
+          "confirmed" : corona_data["cases"],
+          "active"   :  corona_data["active"],
+          "deaths"   : corona_data["deaths"],
+          "recovered" : corona_data["recovered"]
         }
         
         bottom_10_datas.append(info)
 
 
-    bottom_10_datas = sorted(bottom_10_datas,key= lambda i:i['confirmed'])
+    bottom_10_datas = sorted(bottom_10_datas,key= lambda i:int(i["confirmed"])) 
 
     bottom_10_datas = bottom_10_datas[:10]
+
+    for i in range(0,len(bottom_10_datas)):
+        bottom_10_datas[i]["country"] = bottom_10_datas[i]["country"]
+        bottom_10_datas[i]["confirmed"] = format(bottom_10_datas[i]["confirmed"],',d')
+        bottom_10_datas[i]["active"] = format(bottom_10_datas[i]["active"],',d')
+        bottom_10_datas[i]["deaths"] = format(bottom_10_datas[i]["deaths"],',d')
+        bottom_10_datas[i]["recovered"] = format(bottom_10_datas[i]["recovered"],',d')
+
 
     return render_template('bottom_10_datas.html',bottom_10_datas=bottom_10_datas)    
 
@@ -185,9 +200,9 @@ def country_wise_data(country_name):
              
 
             total_state_data =[]
-            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of confirmed cases in India']),',d'))
-            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of deaths  in India']) ,',d') )
-            total_state_data.append(format(int(data['state_wise_data'][0]['Total number of recovered  in India']),',d'))
+            total_state_data.append(total_confirmed)
+            total_state_data.append(total_deaths)
+            total_state_data.append(total_recovered)
 
         
         return render_template('county_wise_corona_data.html',country_name=country_name,total_confirmed=total_confirmed,total_active=total_active,total_deaths=total_deaths,total_recovered=total_recovered,labels=labels,total_confirmed_f_graph=total_confirmed_f_graph,total_deaths_f_graph=total_deaths_f_graph,total_recovered_f_graph=total_recovered_f_graph,state_wise_datas=state_wise_datas,total_state_data=total_state_data)
